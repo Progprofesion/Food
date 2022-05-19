@@ -57,6 +57,27 @@ a {
   font-weight: 400;
 }
 
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -212,6 +233,24 @@ a {
   color: #000;
   font-size: 22px;
   font-weight: 700;
+}
+.tabheader .show {
+  display: block;
+}
+.tabheader .hide {
+  display: none;
+}
+.tabheader .fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .offer {
