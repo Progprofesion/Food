@@ -57,14 +57,6 @@ a {
   font-weight: 400;
 }
 
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
-}
-
 .fade {
   animation-name: fade;
   animation-duration: 1.5s;
@@ -608,8 +600,8 @@ a {
   top: 0;
   left: 0;
   z-index: 1050;
-  display: none;
   width: 100%;
+  display: none;
   height: 100%;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.5);
