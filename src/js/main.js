@@ -244,32 +244,33 @@ class MenuCard {
         display: block;
         margin: 0 auto
         `;
-        form.append(statusMessages);
-
-        const request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        
-        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        form.insertAdjacentElement('afterend', statusMessages);
         const formData = new FormData(form);
 
         const object = {};
         formData.forEach(function(value, key){
             object[key] = value;
         });
-        const json = JSON.stringify(object);
 
-        request.send(json);
-
-        request.addEventListener('load', () => {
-          if (request.status === 200) {
-              console.log(request.response);
-              showThanksModal(messages.succes);
-              statusMessages.remove();
-              form.reset();
-          } else {
-              showThanksModal(messages.failure);
-          }
-      });
+        fetch('server.php', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json; charset=utf-8'
+          },
+          body: JSON.stringify(object)
+        })
+        .then(data => data.text()) // ПРЕОБРАЗОВАТЬ В ТЕКСТ
+        .then(data => {
+            console.log(data);
+            showThanksModal(messages.succes);
+            statusMessages.remove();
+        })
+        .catch(() => {
+          showThanksModal(messages.failure);
+        })
+        .finally(() => {
+          form.reset();
+        });
   });
 }
     
