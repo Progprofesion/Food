@@ -326,60 +326,75 @@ getResource('http://localhost:3000/menu')
 // ПРОВЕРИТЬ НА КОНЕЧНЫЙ ИНДЕКС
 // СКРЫТЬ ЭЛЕМЕНТЫ
 // ПОКАЗАТЬ ЭЛЕМЕНТЫ
-//  ПЛЮССЛАЙДС
+// PLUSSLIDE
 // ОБРАБОТЧИКИ
 // ПРОВЕРКИ И ДОБАВЛЕНИЕ НОЛЬ
+// -----------------------------------------------------------------------------------------
+
+// ДОБАВИТЬ ОБЕРТКУ 
+// ПОЛУЧИТЬ ОБЕРТКУ
+// ПОЛУЧИТЬ WINDOW ШИРИНУ
+// ПОЛУЧИТЬ ПОЛЕ С СЛАЙДЕРАМИ
+// ШИРИНА = 100% УМНОЖИТЬ НА КОЛИЧЕВСТВО СЛАЙДОВ
+// ДОБАВИТЬ ФЛЕКС
+// ТРАНЗИТИОН
+// ДОБАВИТЬ ОВЕРФЛОУВ НА ОБЕРТКУ
+// УСТАНОВИТЬ СЛАЙДАМ ШИРИНУ
+// ПРОВЕРКА НА ОТСТУП ПЕРЕМЕННАЯ И В ОБРАБОТЧИКАХ
+// УРОВНЯТЬ РАЗМЕР СЛАЙДОВ
+// ОБРАБОТЧИКИ ТРАНСФОРМ И ПРОВЕРКИ
 
 
-  let slideIndex = 1;
+
+
   const slides = document.querySelectorAll('.offer__slide'),
 
         prev = document.querySelector('.offer__slider-prev'),
         next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
         current = document.querySelector('#current');
+  let slideIndex = 1;
 
+  //   showSlides(slideIndex);
 
-    showSlides(slideIndex);
-
-    if (slides.length < 0) {
-      total.textContent = `0${slides.length}`;
-    } else {
-      total.textContent = slides.length;
-    }
+  //   if (slides.length < 0) {
+  //     total.textContent = `0${slides.length}`;
+  //   } else {
+  //     total.textContent = slides.length;
+  //   }
     
 
-    function showSlides (n) {
-      if (n > slides.length) {
-        slideIndex = 1;
-    }
-    if (n < 1) {
-        slideIndex = slides.length;
-    }
+  //   function showSlides (n) {
+  //     if (n > slides.length) {
+  //       slideIndex = 1;
+  //   }
+  //   if (n < 1) {
+  //       slideIndex = slides.length;
+  //   }
 
-    slides.forEach(item => item.classList.add('hide'));
-    slides[slideIndex - 1].classList.add('show'); 
-    slides[slideIndex - 1].classList.remove('hide'); 
+  //   slides.forEach(item => item.classList.add('hide'));
+  //   slides[slideIndex - 1].classList.add('show'); 
+  //   slides[slideIndex - 1].classList.remove('hide'); 
     
 
-    if (slides.length < 10) {
-      current.textContent = `0${slideIndex}`;
-    } else {
-      current.textContent =  slideIndex;
-    }
-  }
+  //   if (slides.length < 10) {
+  //     current.textContent = `0${slideIndex}`;
+  //   } else {
+  //     current.textContent =  slideIndex;
+  //   }
+  // }
     
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
+  //   function plusSlides(n) {
+  //     showSlides(slideIndex += n);
+  //   }
 
-    prev.addEventListener('click', function () {
-      plusSlides(-1);
-    });
+  //   prev.addEventListener('click', function () {
+  //     plusSlides(-1);
+  //   });
 
-    next.addEventListener('click', function () {
-      plusSlides(1);
-    });
+  //   next.addEventListener('click', function () {
+  //     plusSlides(1);
+  //   });
 
 
 
