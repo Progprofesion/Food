@@ -118,7 +118,7 @@ const modalTrigger = document.querySelectorAll('[data-modal]'),
 
 
 
-const modalTimerId = setTimeout(openModal, 50000);
+const modalTimerId = setTimeout(openModal, 5000000);
     
 function closeModal() {
   modal.classList.add('hide');
@@ -352,12 +352,84 @@ getResource('http://localhost:3000/menu')
         prev = document.querySelector('.offer__slider-prev'),
         next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
-        current = document.querySelector('#current');
+        current = document.querySelector('#current'),
+        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+        width = window.getComputedStyle(slidesWrapper).width,
+        slidesField = document.querySelector('.offer_slider-inner');
+
   let slideIndex = 1;
+  let offset = 0;
+
+  if (slides.length < 10) {
+    total.textContent = `0${slides.length}`;
+    current.textContent = `0${slideIndex}`;
+  } else {
+    total.textContent = slides.length;
+    current.textContent = slideIndex;
+  }
+
+    slidesField.style.width = 100 * slides.length + '%';
+    slidesField.style.display = 'flex';
+    slidesField.style.transition = '0.5s all';
+
+    slidesWrapper.style.overflow = 'hidden';
+
+    slides.forEach(slide => {
+      slide.style.width = width;
+    });
+
+    next.addEventListener('click', () => {
+      if (offset == +width.slice(0, width.length -2) * (slides.length - 2)) {
+        offset = 0;
+      } else {
+        offset += +width.slice(0, width.length -2);
+      }
+
+      slidesField.style.transform = `translate(-${offset}px)`;
+
+      if (slideIndex == slides.length) {
+        slideIndex = 1;
+      } else {
+        slideIndex++;
+      }
+
+      if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+      } else {
+        current.textContent = slideIndex;
+      }
+
+    });
+
+    prev.addEventListener('click', () => {
+      if (offset == 0) {
+        offset = +width.slice(0, width.length -2) * (slides.length - 2);
+      } else {
+        offset -= +width.slice(0, width.length -2);
+      }
+
+      slidesField.style.transform = `translate(-${offset}px)`;
+
+      if (slideIndex == 1) {
+        slideIndex =  slides.length;
+      } else {
+        slideIndex--;
+      }
+
+      if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+      } else {
+        current.textContent = slideIndex;
+      }
+
+    });
+
+// --------------------------------------------------------------------
+
 
   //   showSlides(slideIndex);
 
-  //   if (slides.length < 0) {
+  //   if (slides.length < 10) {
   //     total.textContent = `0${slides.length}`;
   //   } else {
   //     total.textContent = slides.length;
@@ -396,8 +468,21 @@ getResource('http://localhost:3000/menu')
   //     plusSlides(1);
   //   });
 
+// -----------------------------------------------------------------
 
+// DOTS
 
+// ПОЛУЧИТЬ ГЛАВНЫЙ БЛОК
+// РЕЛАТИВ
+// ОБЕРТКА ДЛЯ ТОЧЕК OL
+// ДОБАВИТЬ СТИЛИ
+// APPEND
+// ЦИКЛ ДЛЯ РАВНОГО КОЛИЧЕСТВА ТОЧЕК К СЛАЙДАМ
+// КАЖДЫЙ ТОЧКЕ АТРИБУТ
+// СТИЛИ
+// КЛАСС АКТИВНОСТИ
+// К СООТВЕТСТВУЮЩЕМУ СЛАЙДУ
+// СОЗДАТЬ ФУНКЦИИ
     
 });
 
