@@ -1,74 +1,64 @@
 
-    let offset = 0;
-    let slideIndex = 1;
+// ПОЛУЧИТЬ ГЛАВНЫЙ БЛОК
+// РЕЛАТИВ
+// СОЗДАТЬ ОБЕРТКУ ДЛЯ ТОЧЕК INDICATORS
+// ДОБАВИТЬ КЛАСС CAROUSEL-INDICATORS
+// APPEND
 
-    const slides = document.querySelectorAll('.offer__slide'),
-        prev = document.querySelector('.offer__slider-prev'),
-        next = document.querySelector('.offer__slider-next'),
-        total = document.querySelector('#total'),
-        current = document.querySelector('#current'),
-        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-        width = window.getComputedStyle(slidesWrapper).width,
-        slidesField = document.querySelector('.offer__slider-inner');
+// ЦИКЛ ДЛЯ РАВНОГО КОЛИЧЕСТВА ТОЧЕК К СЛАЙДАМ
+// СОЗДАТЬ ТОЧКИ LI
+// КАЖДЫЙ ТОЧКЕ АТРИБУТ DATA-SLIDE-TO i + 1
+// СТИЛИ
+// APPEND
 
-    if (slides.length < 10) {
-        total.textContent = `0${slides.length}`;
-        current.textContent =  `0${slideIndex}`;
-    } else {
-        total.textContent = slides.length;
-        current.textContent =  slideIndex;
-    }
+// ПРИВЯЗАТЬ ПЕРВУЮ ТОЧКУ 
+// МАССИВ
+// К СООТВЕТСТВУЮЩЕМУ СЛАЙДУ
+// push dot
+// КАК В ПРОШЛОМ УРОКЕ -+
+// НА ТОЧКИ ОБРАБОТЧКИ СОБЫТИЙ С ОБЪЕКТОМ СОБЫЙТИЙ ПЕРЕМЕННАЯ Е ТАРГЕТ ЗАДЕЙСТВОВАТЬ АТРИБУТ 
+// НА СКОЛЬКО СМЕЩАТЬ И ТРАНСФОРМ
+// ПРОВЕРКИ НА 10
+// СОЗДАТЬ ФУНКЦИИ
+
+const slides = document.querySelectorAll('.offer__slide'),
+slider = document.querySelector('.offer__slider'),
+prev = document.querySelector('.offer__slider-prev'),
+next = document.querySelector('.offer__slider-next'),
+total = document.querySelector('#total'),
+current = document.querySelector('#current'),
+slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+width = window.getComputedStyle(slidesWrapper).width,
+slidesField = document.querySelector('.offer_slider-inner');
+
+let slideIndex = 0;
     
-    slidesField.style.width = 100 * slides.length + '%';
-    slidesField.style.display = 'flex';
-    slidesField.style.transition = '0.5s all';
+    slider.style.position = 'relative';
+    const indicators = document.createElement('ol'),
+          dots = [];
+          indicators.classList.add('.carousel-indicators');
 
-    slidesWrapper.style.overflow = 'hidden';
+          slider.append(indicators);
 
-    slides.forEach(slide => {
-        slide.style.width = width;
-    });
+          for (let i = 0; i < slides.length; i++) {
+              const dot = document.createElement('li');
+              dot.setAttribute('data-slide-to', i + 1);
+              dot.classList.add('dot');
 
-    next.addEventListener('click', () => {
-        if (offset == (+width.slice(0, width.length - 2) * (slides.length - 1))) {
-            offset = 0;
-        } else {
-            offset += +width.slice(0, width.length - 2); 
-        }
+              if (i == 0) {
+                  dot.style.opacity = 1;
+              }
 
-        slidesField.style.transform = `translateX(-${offset}px)`;
+              indicators.append(dot);
+              dots.push(dot);
+          }
 
-        if (slideIndex == slides.length) {
-            slideIndex = 1;
-        } else {
-            slideIndex++;
-        }
+          dots.forEach(dot => dot.style.opacity = '.5');
+          dots[slideIndex - 1].opacity = 1;
 
-        if (slides.length < 10) {
-            current.textContent =  `0${slideIndex}`;
-        } else {
-            current.textContent =  slideIndex;
-        }
-    });
-
-    prev.addEventListener('click', () => {
-        if (offset == 0) {
-            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
-        } else {
-            offset -= +width.slice(0, width.length - 2);
-        }
-
-        slidesField.style.transform = `translateX(-${offset}px)`;
-
-        if (slideIndex == 1) {
-            slideIndex = slides.length;
-        } else {
-            slideIndex--;
-        }
-
-        if (slides.length < 10) {
-            current.textContent =  `0${slideIndex}`;
-        } else {
-            current.textContent =  slideIndex;
-        }
-    });
+          dots.forEach(dot => {
+              dot.addEventListener('clicl', (e) => {
+                const slideTo = e.target.setAttribute('data-slide-to');
+                slideIndex = slideTo;
+              });
+          });

@@ -3063,9 +3063,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // ПРОВЕРКА НА ОТСТУП ПЕРЕМЕННАЯ И В ОБРАБОТЧИКАХ
   // УРОВНЯТЬ РАЗМЕР СЛАЙДОВ
   // ОБРАБОТЧИКИ ТРАНСФОРМ И ПРОВЕРКИ
+  // -----------------------------------------------------------------
+  // DOTS
+  // ПОЛУЧИТЬ ГЛАВНЫЙ БЛОК
+  // РЕЛАТИВ
+  // СОЗДАТЬ ОБЕРТКУ ДЛЯ ТОЧЕК INDICATORS
+  // ДОБАВИТЬ КЛАСС CAROUSEL-INDICATORS
+  // ДОБАВИТЬ СТИЛИ
+  // APPEND
+  // ЦИКЛ ДЛЯ РАВНОГО КОЛИЧЕСТВА ТОЧЕК К СЛАЙДАМ
+  // СОЗДАТЬ ТОЧКИ LI
+  // КАЖДЫЙ ТОЧКЕ АТРИБУТ DATA-SLIDE-TO
+  // СТИЛИ
+  // АППЕНД
+  // ПРИВЯЗАТЬ ПЕРВУЮ ТОЧКУ 
+  // МАССИВ
+  // К СООТВЕТСТВУЮЩЕМУ СЛАЙДУ КАК В ПРОШЛОМ УРОКЕ В ОБРАБОТЧИКЕ
+  // НА ТОЧКИ ОБРАБОТЧКИ СОБЫТИЙ С ОБЪЕКТОМ СОБЫЙТИЙ ПЕРЕМЕННАЯ Е ТАРГЕТ ЗАДЕЙСТВОВАТЬ АТРИБУТ 
+  // НА СКОЛЬКО СМЕЩАТЬ И ТРАНСФОРМ
+  // ПРОВЕРКИ НА 10
+  // СОЗДАТЬ ФУНКЦИИ
 
 
   const slides = document.querySelectorAll('.offer__slide'),
+        slider = document.querySelector('.offer__slider'),
         prev = document.querySelector('.offer__slider-prev'),
         next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
@@ -3088,6 +3109,25 @@ document.addEventListener('DOMContentLoaded', () => {
   slidesField.style.display = 'flex';
   slidesField.style.transition = '0.5s all';
   slidesWrapper.style.overflow = 'hidden';
+  slider.style.position = 'relative';
+  const indicators = document.createElement('ol'),
+        dots = [];
+  indicators.classList.add('carousel-indicators');
+  slider.append(indicators);
+
+  for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement('li');
+    dot.setAttribute('data-slide-to', i + 1);
+    dot.classList.add('dot');
+
+    if (i == 0) {
+      dot.style.opacity = 1;
+    }
+
+    indicators.append(dot);
+    dots.push(dot);
+  }
+
   slides.forEach(slide => {
     slide.style.width = width;
   });
@@ -3111,6 +3151,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       current.textContent = slideIndex;
     }
+
+    dots.forEach(dot => dot.style.opacity = '.5');
+    dots[slideIndex - 1].style.opacity = 1;
+    dots.forEach(dot => {
+      dot.addEventListener('click', e => {
+        const slideTo = e.target.getAttribute('data-slide-to');
+        slideIndex = slideTo;
+        offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+        slidesField.style.transform = `translateX(-${offset}px)`;
+
+        if (slides.length < 10) {
+          current.textContent = `0${slideIndex}`;
+        } else {
+          current.textContent = slideIndex;
+        }
+
+        dots.forEach(dot => dot.style.opacity = ".5");
+        dots[slideIndex - 1].style.opacity = 1;
+      });
+    });
   });
   prev.addEventListener('click', () => {
     if (offset == 0) {
@@ -3132,6 +3192,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       current.textContent = slideIndex;
     }
+
+    dots.forEach(dot => dot.style.opacity = '.5');
+    dots[slideIndex - 1].style.opacity = 1;
+    dots.forEach(dot => {
+      dot.addEventListener('click', e => {
+        const slideTo = e.target.getAttribute('data-slide-to');
+        slideIndex = slideTo;
+        offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+        slidesField.style.transform = `translateX(-${offset}px)`;
+
+        if (slides.length < 10) {
+          current.textContent = `0${slideIndex}`;
+        } else {
+          current.textContent = slideIndex;
+        }
+
+        dots.forEach(dot => dot.style.opacity = ".5");
+        dots[slideIndex - 1].style.opacity = 1;
+      });
+    });
   }); // --------------------------------------------------------------------
   //   showSlides(slideIndex);
   //   if (slides.length < 10) {
@@ -3164,19 +3244,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //   next.addEventListener('click', function () {
   //     plusSlides(1);
   //   });
-  // -----------------------------------------------------------------
-  // DOTS
-  // ПОЛУЧИТЬ ГЛАВНЫЙ БЛОК
-  // РЕЛАТИВ
-  // ОБЕРТКА ДЛЯ ТОЧЕК OL
-  // ДОБАВИТЬ СТИЛИ
-  // APPEND
-  // ЦИКЛ ДЛЯ РАВНОГО КОЛИЧЕСТВА ТОЧЕК К СЛАЙДАМ
-  // КАЖДЫЙ ТОЧКЕ АТРИБУТ
-  // СТИЛИ
-  // КЛАСС АКТИВНОСТИ
-  // К СООТВЕТСТВУЮЩЕМУ СЛАЙДУ
-  // СОЗДАТЬ ФУНКЦИИ
 });
 
 /***/ })
