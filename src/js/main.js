@@ -14,12 +14,15 @@ import modal from './modules/modal';
 import slider from './modules/slider';
 import tabs from './modules/tabs';
 import timer from './modules/timer';
+import {openModal} from './modules/modal';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const modalTimerId = setTimeout(() => openModal('.modal', modalTimerId), 5000000);
+
   calc();
   cards();
-  forms();
-  modal();
+  forms(modalTimerId);
+  modal('[data-modal]', '.modal');
   slider();
   tabs();
   timer();   
