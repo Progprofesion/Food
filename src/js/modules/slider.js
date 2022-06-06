@@ -1,16 +1,14 @@
-function slider () {
-    //  Slider
+function slider ({container, slide, prevArrow, nextArrow, totalCounter, currenCounter, wrapper, field}) {
 
-
-  const slides = document.querySelectorAll('.offer__slide'),
-  slider = document.querySelector('.offer__slider'),
-  prev = document.querySelector('.offer__slider-prev'),
-  next = document.querySelector('.offer__slider-next'),
-  total = document.querySelector('#total'),
-  current = document.querySelector('#current'),
-  slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+  const slides = document.querySelectorAll(slide),
+  slider = document.querySelector(container),
+  prev = document.querySelector(prevArrow),
+  next = document.querySelector(nextArrow),
+  total = document.querySelector(totalCounter),
+  current = document.querySelector(currenCounter),
+  slidesWrapper = document.querySelector(wrapper),
   width = window.getComputedStyle(slidesWrapper).width,
-  slidesField = document.querySelector('.offer_slider-inner');
+  slidesField = document.querySelector(field);
 
   function binding() {
     dots.forEach(dot => dot.style.opacity = ".5");

@@ -1,10 +1,3 @@
-// 1 --- СКРЫВАТЬ НЕНУЖНЫЕ ТАБЫ УДАЛИТЬ КЛАСС АКТИВНОСТИ
-// 2 --- ПОКАЗАТЬ НУЖНЫЙ ТАБ --- ПЕРВЫЙ ---
-// 3 --- НАЗНАЧИТЬ ОБРАБОТЧИК СОБЫТИЙ
-// 4 --- ВЫЧИСЛЯТЬ СКОЛЬКО ОСТАЛОСЬ ВРЕМЕНИ РАЗНИЦУ
-// 5 --- ПОЛУЧАТЬ ЭЛЕМЕНТЫ И ЧТО-ТО С НИМИ ДЕЛАТЬ
-// 6 --- ОБНОВЛЕНИЯ ТАЙМЕРА 
-
 'use strict';  
 
 import calc from './modules/calc';
@@ -23,9 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
   cards();
   forms(modalTimerId);
   modal('[data-modal]', '.modal');
-  slider();
-  tabs();
-  timer();   
+  slider({
+    container: '.offer__slider',
+    slide: '.offer__slide',
+    prevArrow: '.offer__slider-prev',
+    nextArrow: '.offer__slider-next',
+    totalCounter: '#total',
+    currenCounter: '#current',
+    wrapper: '.offer__slider-wrapper',
+    field: '.offer_slider-inner'
+  });
+  tabs('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
+  timer('.timer', '2022-06-29');   
 });
 
 
